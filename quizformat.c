@@ -1,32 +1,38 @@
 #include <stdio.h>
 #include <string.h>
+
 int main() {
+	// Declaration
 	char language[1000] = { 0, };
 	char question[5000] = { 0, };
-	char answer[5000] = { 0, };
-	char image[2000] = {0,};
-	int res = 0, point = 0, i;
-	printf("¾ğ¾îÀÔ·Â");
+	char explan[5000] = { 0, };
+	char image[2000] = { 0, };
+	int answer = 0, point = 0, i;
+
+	// Prompt
+	printf("ì–¸ì–´ì…ë ¥> ");
 	scanf("%s", language);
-	printf("Áú¹®³»¿ëÀÔ·Â(³¡³¯‹š ` ÀÔ·Â)");
+	printf("ì§ˆë¬¸ ë‚´ìš©ì…ë ¥> ");
 	getchar();
-	scanf("%[^`]", question);
-	printf("´äº¯³»¿ëÀÔ·Â(³¡³¯‹š ` ÀÔ·Â)");
+	scanf("%[^\n]", question);
+	printf("ë‹µ ì…ë ¥ (1ì€ true, 0ëŠ” false)> ");
+	getchar();
+	scanf("%d", &answer);
+	printf("í•´ì„¤ ë‚´ìš©ì…ë ¥> ");
 	getchar();
 	getchar();
-	scanf("%[^`]", answer);
-	printf("»çÁøÀÌ ÀÖ´Ù¸é ÁÖ¼ÒÀÔ·Â(¾øÀ¸¸é ±×³É ¿£ÅÍ)");
+	scanf("%[^\n]", explan);
+	printf("ì‚¬ì§„ì´ ìˆë‹¤ë©´ ì£¼ì†Œì…ë ¥ (ì—†ìœ¼ë©´ ì—”í„° ë‘ë²ˆ)> ");
 	getchar();
 	getchar();
 	scanf("%[^\n]", image);
-	printf("´ä ÀÔ·Â(1Àº true,2´Â false)");
-	getchar();
-	scanf("%d", &res);
-	printf("Æ÷ÀÎÆ® ÀÔ·Â");
+	printf("ì ìˆ˜ ì…ë ¥ (1~5)> ");
 	scanf("%d", &point);
-	printf("ÀÌÇÏ¸¦ º¹ºÙÇØ¼­ ÄÚµå¹Ø¿¡ ³ÖÀ¸¸é µÊ");
+
+	// Print & Calculate
+	printf("\në³€í™˜ëœ JSONì½”ë“œ:");
 	printf("\n\n\n");
-	printf(",\n  {\n");
+	printf("  },\n  {\n");
 	printf("    \"language\": \"%s\",\n", language);
 	printf("    \"question\": \"");
 	for (i = 0; i < strlen(question); i++) {
@@ -37,25 +43,28 @@ int main() {
 			printf("%c", question[i]);
 	}
 	printf("\",\n");
-	if (res == 1) {
-		printf("    \"awnser\": \"true\",\n");
-	}
-	else if (res == 2) {
-		printf("    \"awnser\": \"false\",\n");
+	switch (answer) {
+		case 1:
+			printf("    \"awnser\": \"true\",\n");
+			break;
+		
+		default:
+			printf("    \"awnser\": \"false\",\n");
+			break;
 	}
 	printf("    \"explanation\": \"");
-	for (i = 0; i < strlen(answer); i++) {
-		if (answer[i] == 10) {
+	for (i = 0; i < strlen(explan); i++) {
+		if (explan[i] == 10) {
 			printf("\\n");
 		}
 		else
-			printf("%c", answer[i]);
+			printf("%c", explan[i]);
 	}
 	printf("\",\n");
 	if(image[0]){
         printf("    \"image\": \"%s\",\n", image);
 	}
-	printf("    \"point\": \"%d\",\n", point);
-	printf("  }");
+	printf("    \"point\": \"%d\"\n", point);
+	printf("  }\n\nCopyright (C) 2019. Seoa Development Team. GPL Licensed.");
 	return 0;
 }
